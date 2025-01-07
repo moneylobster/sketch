@@ -140,6 +140,9 @@
                        :sketch instance))
   (initialize-environment instance)
   (initialize-gl instance)
+  ;; tiny fix: windows don't show up in Windows initially
+  (sdl2:hide-window (kit.sdl2:sdl-window (sketch-%window instance)))
+  (sdl2:show-window (kit.sdl2:sdl-window (sketch-%window instance)))
   ;; These will have been added in the call to PREPARE.
   (with-slots ((fs %delayed-init-funs)) instance
     (loop for f across fs
